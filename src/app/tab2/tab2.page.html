@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Lumières
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,37 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Lumières</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-grid>
+    <ion-col>
+
+      <ion-list class="ios list-ios hydrated" style="width: 90vw; position: absolute; top: 30vh; transform: translateY(-50%)">
+
+        <ion-item class="item ios in-list ion-focusable hydrated item-label">
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" id="ion-tg-3-lbl" aria-hidden="true">Blanc</ion-label>
+          <ion-toggle (ionChange)="call('D1', $event.detail.checked)" slot="start" [checked]="D1State" name="banana" color="light" aria-labelledby="ion-tg-3-lbl" aria-checked="false" role="switch" class="ion-color ion-color-light ios in-item interactive hydrated">
+            <input type="hidden" class="aux-input" name="white" value="off">
+          </ion-toggle>
+        </ion-item>
+
+        <ion-item class="item ios in-list ion-focusable hydrated item-label">
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" id="ion-tg-6-lbl" aria-hidden="true">Rouge</ion-label>
+          <ion-toggle (ionChange)="call('D2', $event.detail.checked)" slot="start" [checked]="D2State" name="cherry" color="danger" aria-labelledby="ion-tg-6-lbl" aria-checked="false" role="switch" class="ion-color ion-color-danger ios in-item interactive hydrated">
+            <input type="hidden" class="aux-input" name="red" value="off">
+          </ion-toggle>
+        </ion-item>
+
+        <ion-item class="item ios in-list ion-focusable hydrated item-label">
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" id="ion-tg-1-lbl" aria-hidden="true">Orange</ion-label>
+          <ion-toggle (ionChange)="call('D3', $event.detail.checked)" slot="start" [checked]="D3State" name="banana" color="warning" aria-labelledby="ion-tg-1-lbl" aria-checked="false" role="switch" class="ion-color ion-color-warning ios in-item interactive hydrated">
+            <input type="hidden" class="aux-input" name="orange" value="off">
+          </ion-toggle>
+        </ion-item>
+
+      </ion-list>
+    </ion-col>
+  </ion-grid>
 </ion-content>

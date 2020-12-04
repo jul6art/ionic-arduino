@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Paramètres
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,31 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">Paramètres</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-grid>
+    <ion-row class="ion-margin-horizontal">
+      <ion-col class="ion-margin-vertical">
+        <form (ngSubmit)="save()" [formGroup]="formData" class="ion-margin-vertical">
+          <ion-item lines="full">
+            <ion-label position="floating">Adresse IP</ion-label>
+            <ion-input type="text" placeholder="111.222.333.444" formControlName="ip"></ion-input>
+          </ion-item>
+
+          <div *ngIf="(ip.dirty || ip.touched) && ip.errors" class="validation-errors">
+            <app-field-error-display-component [displayError]="ip.errors?.mustBeValidIp" [errorMsg]="'Ce n\'est pas une adresse IP valide'">
+            </app-field-error-display-component>
+          </div>
+
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" color="primary" expand="block" [disabled]="!formData.valid">Enregistrer</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
