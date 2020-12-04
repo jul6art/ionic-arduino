@@ -1,0 +1,7 @@
+{
+  "name": "arduinoLights",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
