@@ -1,4 +1,4 @@
 export const settings = {
-    default_ip: '192.168.0.106'
+    default_ip: '109.89.204.115'
 };
 
