@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Paramètres
+      Appareils
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,31 +9,30 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Paramètres</ion-title>
+      <ion-title size="large">Appareils</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-grid>
-    <ion-row class="ion-margin-horizontal">
-      <ion-col class="ion-margin-vertical">
-        <form (ngSubmit)="save()" [formGroup]="formData" class="ion-margin-vertical">
-          <ion-item lines="full">
-            <ion-label position="floating">Adresse IP</ion-label>
-            <ion-input type="text" placeholder="111.222.333.444" formControlName="ip"></ion-input>
-          </ion-item>
+    <ion-col>
 
-          <div *ngIf="(ip.dirty || ip.touched) && ip.errors" class="validation-errors">
-            <app-field-error-display-component [displayError]="ip.errors?.mustBeValidIp" [errorMsg]="'Ce n\'est pas une adresse IP valide'">
-            </app-field-error-display-component>
-          </div>
+      <ion-list class="ios list-ios hydrated" style="width: 90vw; position: absolute; top: 30vh; transform: translateY(-50%)">
 
-          <ion-row>
-            <ion-col>
-              <ion-button type="submit" color="primary" expand="block" [disabled]="!formData.valid">Enregistrer</ion-button>
-            </ion-col>
-          </ion-row>
-        </form>
-      </ion-col>
-    </ion-row>
+        <ion-item class="item ios in-list ion-focusable hydrated item-label">
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" id="ion-tg-3-lbl" aria-hidden="true">Horloge</ion-label>
+          <ion-toggle (ionChange)="call('CLOCK', $event.detail.checked)" slot="start" [checked]="ClockState" name="banana" color="secondary" aria-labelledby="ion-tg-3-lbl" aria-checked="false" role="switch" class="ion-color ion-color-secondary ios in-item interactive hydrated">
+            <input type="hidden" class="aux-input" name="white" value="off">
+          </ion-toggle>
+        </ion-item>
+
+        <ion-item class="item ios in-list ion-focusable hydrated item-label">
+          <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" id="ion-tg-6-lbl" aria-hidden="true">Décibels</ion-label>
+          <ion-toggle (ionChange)="call('DECIBELS', $event.detail.checked)" slot="start" [checked]="DecibelsState" name="cherry" color="secondary" aria-labelledby="ion-tg-6-lbl" aria-checked="false" role="switch" class="ion-color ion-color-secondary ios in-item interactive hydrated">
+            <input type="hidden" class="aux-input" name="red" value="off">
+          </ion-toggle>
+        </ion-item>
+
+      </ion-list>
+    </ion-col>
   </ion-grid>
 </ion-content>

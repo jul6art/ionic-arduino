@@ -1,48 +1,67 @@
-import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup} from '@angular/forms';
-import {ToastrService} from '../services/toastr.service';
+import {Component} from '@angular/core';
 import {IpService} from '../services/ip.service';
-import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {HTTP} from '@ionic-native/http/ngx';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page implements OnInit {
-  formData: FormGroup;
-  ipAddress: string;
+export class Tab3Page {
+  ClockState: boolean;
+  DecibelsState: boolean;
 
-  constructor(
-      private fb: FormBuilder,
-      private toastr: ToastrService,
-      private router: Router,
-      private ipService: IpService) { }
+  ip$: Observable<string | null>;
+  ip: string|null = null;
 
-  ngOnInit() {
-    this.ipAddress = this.ipService.peekIp();
-
-    this.formData = this.fb.group({
-      ip: [this.ipAddress, [this.mustBeValidIp]],
-    });
+  constructor(private http: HTTP, private ipService: IpService) {
   }
 
-  private mustBeValidIp(c: AbstractControl): { [key: string]: boolean } {
-    let rv: { [key: string]: boolean } = {};
-    if (!/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(c.value)) {
-      rv['mustBeValidIp'] = true;
+  call(path: string, state: boolean|null): void
+  {
+    let url: string = 'http://' + this.ip + '/' + path;
+
+    if (null !== state) {
+      url += '/' + (state ? 1 : 0);
     }
-    return rv;
+
+    this.http.get(url, {}, {})
+        .then(data => {
+          console.log(data.status);
+          console.log(data.data); // data received by server
+          console.log(data.headers);
+
+          if (state === null) {
+            state = (parseInt(data.data) === 1);
+          }
+
+          if (path === 'CLOCK') {
+            this.ClockState = state;
+          } else {
+            this.DecibelsState = state;
+          }
+        })
+        .catch(error => {
+
+          alert('server down');
+
+          console.log(error.status);
+          console.log(error.error); // error message as string
+          console.log(error.headers);
+        });
   }
 
-  get ip() {
-    return this.formData.get('ip');
-  }
+  ionViewWillEnter() {
+    this.ip$ = this.ipService.watchIp();
 
-  async save() {
-    this.ipService.pokeIp(this.formData.get('ip').value);
+    this.ip$.subscribe(ip => {
+      if (ip !== null) {
+        this.ip = ip;
+      }
+    });
 
-    this.toastr.addFlash('Adresse IP mise à jour');
-    this.router.navigateByUrl('/tabs/tab1', { replaceUrl: true });
+    this.call('CLOCK', null);
+    this.call('DECIBELS', null);
   }
 }
