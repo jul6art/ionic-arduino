@@ -30,10 +30,6 @@ export class Tab2Page {
 
     this.http.get(url, {}, {})
         .then(data => {
-          console.log(data.status);
-          console.log(data.data); // data received by server
-          console.log(data.headers);
-
           if (state === null) {
             state = (parseInt(data.data) === 1);
           }

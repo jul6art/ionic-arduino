@@ -33,6 +33,11 @@ $ ionic cordova run ios --livereload --external --consolelogs
 
 Then visit [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
+Sources
+-------
+
+* https://bootsoon.github.io/ng-circle-progress/
+
 License
 -------
 

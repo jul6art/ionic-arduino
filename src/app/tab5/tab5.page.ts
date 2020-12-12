@@ -10,14 +10,16 @@ import {HTTP} from '@ionic-native/http/ngx';
 })
 export class Tab5Page {
   DecibelsState: boolean;
+  DecibelsValue: number;
 
   ip$: Observable<string | null>;
   ip: string|null = null;
 
   constructor(private http: HTTP, private ipService: IpService) {
+    this.DecibelsValue = 0;
   }
 
-  call(path: string, state: boolean|null): void
+  call(path: string, state: boolean|null, value: boolean|null): void
   {
     let url: string = 'http://' + this.ip + '/' + path;
 
@@ -25,14 +27,22 @@ export class Tab5Page {
       url += '/' + (state ? 1 : 0);
     }
 
+    if (null !== value) {
+      url += '/VALUE';
+    }
+
     this.http.get(url, {}, {})
         .then(data => {
-          if (state === null) {
-            state = (parseInt(data.data) === 1);
-          }
+          if (null === value) {
+            if (state === null) {
+              state = (parseInt(data.data) === 1);
+            }
 
-          if (path === 'DECIBELS') {
-            this.DecibelsState = state;
+            if (path === 'DECIBELS') {
+              this.DecibelsState = state;
+            }
+          } else {
+            this.DecibelsValue = data.data;
           }
         })
         .catch(error => {
@@ -54,6 +64,12 @@ export class Tab5Page {
       }
     });
 
-    this.call('DECIBELS', null);
+    this.call('DECIBELS', null, null);
+
+    const decibelsTimeout = setInterval(() => {
+      if (this.DecibelsState) {
+        this.call('DECIBELS', null, true);
+      }
+    }, 1000);
   }
 }
