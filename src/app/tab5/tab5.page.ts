@@ -4,12 +4,12 @@ import {Observable} from 'rxjs';
 import {HTTP} from '@ionic-native/http/ngx';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-tab5',
+  templateUrl: 'tab5.page.html',
+  styleUrls: ['tab5.page.scss']
 })
-export class Tab3Page {
-  ClockState: boolean;
+export class Tab5Page {
+  DecibelsState: boolean;
 
   ip$: Observable<string | null>;
   ip: string|null = null;
@@ -31,8 +31,8 @@ export class Tab3Page {
             state = (parseInt(data.data) === 1);
           }
 
-          if (path === 'CLOCK') {
-            this.ClockState = state;
+          if (path === 'DECIBELS') {
+            this.DecibelsState = state;
           }
         })
         .catch(error => {
@@ -54,6 +54,6 @@ export class Tab3Page {
       }
     });
 
-    this.call('CLOCK', null);
+    this.call('DECIBELS', null);
   }
 }
