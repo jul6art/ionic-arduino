@@ -11,10 +11,20 @@ import { AppComponent } from './app.component';
 
 import { HTTP } from '@ionic-native/http/ngx';
 
+import { NgCircleProgressModule } from 'ng-circle-progress';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+      BrowserModule,
+      IonicModule.forRoot(),
+      NgCircleProgressModule.forRoot({
+        animation: false,
+        responsive: true}
+      ),
+      AppRoutingModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

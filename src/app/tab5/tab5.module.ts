@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab5PageRoutingModule } from './tab5-routing.module';
 import {FieldErrorDisplayComponentComponent} from '../field-error-display-component/field-error-display-component.component';
+import {NgCircleProgressModule} from 'ng-circle-progress';
 
 @NgModule({
     imports: [
@@ -18,6 +19,7 @@ import {FieldErrorDisplayComponentComponent} from '../field-error-display-compon
         RouterModule.forChild([{path: '', component: Tab5Page}]),
         Tab5PageRoutingModule,
         ReactiveFormsModule,
+        NgCircleProgressModule,
     ],
     declarations: [Tab5Page, FieldErrorDisplayComponentComponent]
 })
