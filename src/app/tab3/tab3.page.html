@@ -16,16 +16,40 @@
   <ion-grid>
     <ion-col>
 
-      <ion-list class="ios list-ios hydrated" style="width: 90vw; position: absolute; top: 40vh; transform: translateY(-50%)">
+      <ion-list class="ios list-ios hydrated">
 
         <ion-item class="item ios in-list ion-focusable hydrated item-label">
           <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated" id="ion-tg-3-lbl" aria-hidden="true">Horloge</ion-label>
-          <ion-toggle (ionChange)="call('CLOCK', $event.detail.checked)" slot="start" [checked]="ClockState" name="banana" color="secondary" aria-labelledby="ion-tg-3-lbl" aria-checked="false" role="switch" class="ion-color ion-color-secondary ios in-item interactive hydrated">
+          <ion-toggle (ionChange)="call('CLOCK', $event.detail.checked, null)" slot="start" [checked]="ClockState" name="banana" color="secondary" aria-labelledby="ion-tg-3-lbl" aria-checked="false" role="switch" class="ion-color ion-color-secondary ios in-item interactive hydrated">
             <input type="hidden" class="aux-input" name="white" value="off">
           </ion-toggle>
         </ion-item>
 
       </ion-list>
+    </ion-col>
+    <ion-col>
+      <div *ngIf="ClockState" class="ion-margin">
+        <circle-progress
+                [percent]="Percent"
+                [radius]="90"
+                [space]="-10"
+                [outerStrokeGradient]="true"
+                [outerStrokeWidth]="10"
+                [innerStrokeWidth]="10"
+                [outerStrokeColor]="'#4882c2'"
+                [outerStrokeGradientStopColor]="'#53a9ff'"
+                [innerStrokeColor]="'#e7e8ea'"
+                [animationDuration]="300"
+                [maxPercent]="100"
+                [showTitle]="false"
+                [showUnits]="false"
+                [showBackground]="false"
+                [subtitle]="ClockValue"
+                [subtitleColor]="'#4882c2'"
+                [subtitleFontSize]="'28px'"
+                [subtitleFontWeight]="'bold'"
+        ></circle-progress>
+      </div>
     </ion-col>
   </ion-grid>
 </ion-content>

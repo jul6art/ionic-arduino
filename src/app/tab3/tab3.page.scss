@@ -1,0 +1,11 @@
+.timePartContainer {
+  display: flex;
+  align-items: center;
+
+  .timePart {
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 6px 12px;
+    margin: 4px;
+  }
+}
