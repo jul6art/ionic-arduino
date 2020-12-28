@@ -10,6 +10,7 @@ import {HTTP} from '@ionic-native/http/ngx';
 })
 export class Tab3Page {
   ClockState: boolean;
+  ClockTimeout: any;
   ClockValue: string;
   Percent: number;
 
@@ -40,9 +41,7 @@ export class Tab3Page {
               state = (parseInt(data.data) === 1);
             }
 
-            if (path === 'CLOCK') {
-              this.ClockState = state;
-            }
+            this.ClockState = state;
           } else {
             const ClockValueChars = [];
             data.data.split(':').forEach((timePart: string) => {
@@ -80,10 +79,14 @@ export class Tab3Page {
 
     this.call('CLOCK', null, null);
 
-    const clockTimeout = setInterval(() => {
+    this.ClockTimeout = setInterval(() => {
       if (this.ClockState) {
         this.call('CLOCK', null, true);
       }
     }, 1000);
+  }
+
+  ionViewDidLeave() {
+    clearInterval(this.ClockTimeout);
   }
 }

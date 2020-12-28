@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HTTP } from '@ionic-native/http/ngx';
-import {settings} from '../shared/settings.constant';
 import {Observable} from 'rxjs';
 import {IpService} from '../services/ip.service';
 

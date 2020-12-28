@@ -10,6 +10,7 @@ import {HTTP} from '@ionic-native/http/ngx';
 })
 export class Tab5Page {
   DecibelsState: boolean;
+  DecibelsTimeout: any;
   DecibelsValue: number;
 
   ip$: Observable<string | null>;
@@ -38,9 +39,7 @@ export class Tab5Page {
               state = (parseInt(data.data) === 1);
             }
 
-            if (path === 'DECIBELS') {
-              this.DecibelsState = state;
-            }
+            this.DecibelsState = state;
           } else {
             this.DecibelsValue = data.data;
           }
@@ -66,10 +65,14 @@ export class Tab5Page {
 
     this.call('DECIBELS', null, null);
 
-    const decibelsTimeout = setInterval(() => {
+    this.DecibelsTimeout = setInterval(() => {
       if (this.DecibelsState) {
         this.call('DECIBELS', null, true);
       }
     }, 1000);
+  }
+
+  ionViewDidLeave() {
+    clearInterval(this.DecibelsTimeout);
   }
 }
