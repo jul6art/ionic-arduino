@@ -26,9 +26,9 @@ Start server
 ------------
 
 ```shell
-$ ionic cordova platform add ios
-$ ionic cordova build ios
-$ ionic cordova run ios --livereload --external --consolelogs
+ionic cordova platform add ios
+ionic cordova build ios
+ionic cordova run ios --livereload --external --consolelogs
 ```
 
 Then visit [http://127.0.0.1:8000](http://127.0.0.1:8000)
