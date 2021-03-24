@@ -17,7 +17,7 @@ Ionic Arduino project
 Installation
 ------------
 
-```console
+```shell
 git clone https://github.com/jul6art/ionic-arduino.git
 ```
 
@@ -25,7 +25,7 @@ git clone https://github.com/jul6art/ionic-arduino.git
 Start server
 ------------
 
-```console
+```shell
 $ ionic cordova platform add ios
 $ ionic cordova build ios
 $ ionic cordova run ios --livereload --external --consolelogs
